@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import com.zuchowicz.jakub.TicketManager.repository.TicketRepository;
 
+import java.util.List;
+
 @Service
 public class TicketService {
 
@@ -13,7 +15,9 @@ public class TicketService {
     public TicketService(TicketRepository ticketRepository) {this.ticketRepository = ticketRepository; }
 
     public Ticket findTicketById(Long ticketId) {return ticketRepository.findById(ticketId).orElse(null); }
-
+    public List<Ticket> getTickets() {
+        return ticketRepository.findAll();
+    }
     public Ticket addTicket(Ticket newTicket) {
         if (newTicket == null) {
             throw new IllegalArgumentException("nowy bilet nie moze byc null");
